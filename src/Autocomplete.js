@@ -9,11 +9,24 @@ export class Autocomplete extends Component {
     activeOption: 0,
     filteredOptions: [],
     showOptions: false,
-    userInput: ''
+    userInput: '',
+    stations: [],
+    error: ""
   };
 
+
+  searchStations () {
+    console.log("running search stations")
+  fetch(`http://savills-techtest-nwapi.eba-eammdiqd.eu-west-2.elasticbeanstalk.com/stations?name=${this.state.userInput}`)
+    .then((response) => response.json())
+    .then(response => this.setState({stations: response})
+    // .then(console.log('this.state.stations', this.state.stations))
+    )
+}
+
   onChange = (e) => {
-    console.log('onChanges');
+    console.log('this.state.stations', this.state.stations);
+   
 
     const { options } = this.props;
     const userInput = e.currentTarget.value;
@@ -32,13 +45,18 @@ export class Autocomplete extends Component {
   };
 
   onClick = (e) => {
+    console.log("running on click")
+   
+    this.searchStations()
     this.setState({
       activeOption: 0,
       filteredOptions: [],
       showOptions: false,
       userInput: e.currentTarget.innerText
     });
+    console.log('this.state.userInput', this.state.userInput);
   };
+ 
   onKeyDown = (e) => {
     const { activeOption, filteredOptions } = this.state;
 
@@ -63,6 +81,7 @@ export class Autocomplete extends Component {
   };
 
   render() {
+    console.log('this.state.stations', this.state.stations);
     const {
       onChange,
       onClick,
@@ -106,7 +125,6 @@ export class Autocomplete extends Component {
             onKeyDown={onKeyDown}
             value={userInput}
           />
-          {/* <input type="submit" value="" className="search-btn" /> */}
         </div>
         {optionList}
       </React.Fragment>

@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { createStore } from 'redux'
-import manuel from 'manuel'
 import './App.css';
-import { Provider } from 'react-redux'
 import Autocomplete from "./Autocomplete";
 
 function App() {
@@ -14,20 +11,9 @@ function App() {
         .then((data) => setData(data));
 }, []);
 
-
-
-console.log("data", data)
-console.log("data.data", data.data)
 const stations = data.data
 
-
-// const stationsArray = []
-// // eslint-disable-next-line
-// stations ? stations.forEach((obj) => {
-// 	Object.keys(obj).forEach((key) => {
-//     stationsArray.push(obj[key]);
-//   });
-// }) : null;
+console.log("stations", stations)
 
 const stationsArray = []
 if (stations) {
@@ -36,13 +22,11 @@ if (stations) {
     };
 }
 
-
-// console.log("stationsArray", stationsArray)
 console.log("stationsArray", stationsArray)
 
   return (
     <div className="App">
-     <h1>TEST</h1>
+     <h1>Station Lookup</h1>
      <Autocomplete
         options={stationsArray
         }

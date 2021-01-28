@@ -20,17 +20,13 @@ export class Autocomplete extends Component {
   fetch(`http://savills-techtest-nwapi.eba-eammdiqd.eu-west-2.elasticbeanstalk.com/stations?name=${this.state.userInput}`)
     .then((response) => response.json())
     .then(response => this.setState({stations: response})
-    // .then(console.log('this.state.stations', this.state.stations))
     )
 }
 
   onChange = (e) => {
     console.log('this.state.stations', this.state.stations);
-   
-
     const { options } = this.props;
     const userInput = e.currentTarget.value;
-
     const filteredOptions = options.filter(
       (optionName) =>
         optionName.toLowerCase().indexOf(userInput.toLowerCase()) > -1
@@ -46,7 +42,6 @@ export class Autocomplete extends Component {
 
   onClick = (e) => {
     console.log("running on click")
-   
     this.searchStations()
     this.setState({
       activeOption: 0,
